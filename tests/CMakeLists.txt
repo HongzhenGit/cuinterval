@@ -1,15 +1,16 @@
 include(FetchContent)
 
-set(BOOST_UT_DISABLE_MODULE ON)
-
 # Testing library
 FetchContent_Declare(
   ut
   GIT_REPOSITORY https://github.com/boost-ext/ut.git
-  GIT_TAG v2.1.1
+  GIT_TAG v2.3.1
   EXCLUDE_FROM_ALL
 )
 FetchContent_MakeAvailable(ut)
+
+# List of all generated test files
+include(generated/tests.cmake)
 
 # Tests need to be added as executables first
 add_executable(tests 
@@ -27,18 +28,7 @@ add_executable(tests
     tests_powf.h
     tests_powf.cu
     tests_powf.cpp
-    generated/tests_generated.cpp
-    generated/tests_c_xsc.cpp
-    generated/tests_libieeep1788_elem.cpp
-    generated/tests_libieeep1788_rec_bool.cpp
-    generated/tests_libieeep1788_cancel.cpp
-    generated/tests_libieeep1788_bool.cpp
-    generated/tests_libieeep1788_set.cpp
-    generated/tests_libieeep1788_num.cpp
-    generated/tests_atan2.cpp
-    generated/tests_mpfi.cpp
-    generated/tests_intervalarithmeticjl.cpp
-    generated/tests_filib.cpp
+    ${generated_test_files}
 )
 
 # Use C++20 in the tests

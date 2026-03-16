@@ -1,4 +1,13 @@
-<h1 align='center'>CuInterval</h1>
+<h1 align='center'>CuInterval
+
+[![Cpp Version](https://img.shields.io/badge/requires-C++20-blue)](https://github.com/neilkichler/cuinterval/tree/main?tab=readme-ov-file#build-requirements)
+[![CUDA Version](https://img.shields.io/badge/CUDA-12+-8A2BE2?logo=nvidia)](https://github.com/neilkichler/cuinterval/tree/main?tab=readme-ov-file#build-requirements)
+[![CMake Version](https://img.shields.io/badge/CMake-3.25.2+-blue?logo=cmake)](https://github.com/neilkichler/cuinterval/tree/main?tab=readme-ov-file#build-requirements)
+[![Docs](https://img.shields.io/badge/documentation-latest-8A2BE2)](https://neilkichler.github.io/cuinterval)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.15813967.svg)](https://doi.org/10.5281/zenodo.15813967)
+[![GitHub License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/neilkichler/cuinterval/blob/main/LICENSE)
+
+</h1>
 
 CuInterval is a CUDA [interval arithmetic](https://en.wikipedia.org/wiki/Interval_arithmetic) library. It includes all fundamental and set-based interval operations of the [IEEE Standard for Interval Arithmetic](https://ieeexplore.ieee.org/stamp/stamp.jsp?tp=&arnumber=7140721).
 Other flavors, including decorations are not supported. 
@@ -75,6 +84,7 @@ The error for a particular operation is given below.
 | asinh     | $\mathbb{IR} \rightarrow \mathbb{IR}$       | 3            |
 | acosh     | $\mathbb{IR} \rightarrow \mathbb{IR}$       | 3            |
 | atanh     | $\mathbb{IR} \rightarrow \mathbb{IR}$       | 3            |
+| coth      | $\mathbb{IR} \rightarrow \mathbb{IR}$       | 3            |
 
 </details>
 
@@ -173,6 +183,16 @@ The error for a particular operation is given below.
 ## Installation
 > Please make sure that you have installed everything mentioned in the section [Build Requirements](#build-requirements).
 
+### Single-Header
+Every [release](https://github.com/neilkichler/cuinterval/releases/) creates a single-header version.
+The latest one can directly be downloaded using, e.g.:
+```bash
+wget https://github.com/neilkichler/cuinterval/releases/download/v0.2.1/cuinterval.cuh
+```
+
+### Header-only folder
+You can grab the latest header-only version from the [releases](https://github.com/neilkichler/cuinterval/releases/) page.
+
 ### System-wide
 ```bash
 git clone https://github.com/neilkichler/cuinterval.git
@@ -187,7 +207,7 @@ cmake --install build
 
 #### [CPM.cmake](https://github.com/cpm-cmake/CPM.cmake)
 ```cmake
-CPMAddPackage("gh:neilkichler/cuinterval@0.0.1")
+CPMAddPackage("gh:neilkichler/cuinterval@0.2.1")
 ```
 
 #### [FetchContent](https://cmake.org/cmake/help/latest/module/FetchContent.html)
@@ -195,8 +215,8 @@ CPMAddPackage("gh:neilkichler/cuinterval@0.0.1")
 include(FetchContent)
 FetchContent_Declare(
   cuinterval
-  GIT_REPOSITORY git@github.com:neilkichler/cuinterval.git
-  GIT_TAG main
+  GIT_REPOSITORY https://github.com/neilkichler/cuinterval.git
+  GIT_TAG v0.2.1
 )
 FetchContent_MakeAvailable(cuinterval)
 ```
@@ -212,6 +232,11 @@ target_link_libraries(${PROJECT_NAME} PUBLIC cuinterval)
 > set_target_properties(${PROJECT_NAME} PROPERTIES CUDA_ARCHITECTURES native)
 > ```
 > where `native` could be replaced by specific versions, see the [CMake docs](https://cmake.org/cmake/help/latest/prop_tgt/CUDA_ARCHITECTURES.html) for more information.
+>
+> Also, currently `nvcc` requires relaxed constexpr support which can be enabled using
+> ```cmake
+> target_compile_options(${PROJECT_NAME} PUBLIC "$<$<COMPILE_LANG_AND_ID:CUDA,NVIDIA>:--expt-relaxed-constexpr>")
+> ```
 
 ## Example
 Have a look at the [examples folder](https://github.com/neilkichler/cuinterval/tree/main/examples).
@@ -222,7 +247,9 @@ The documentation is available [here](https://neilkichler.github.io/cuinterval).
 ## Build
 
 ### Build Requirements
-We use C++20, CMake v3.25.2+, Ninja (optional), and a recent C++ and CUDA compiler.
+We use C++20, CMake 3.25.2+, Ninja (optional), and a recent C++ (`GCC 13+`, `Clang 17+`) and CUDA (`12.5.1+`) compiler.
+
+Other configurations might work but are not tested.
 
 #### Ubuntu
 ```bash

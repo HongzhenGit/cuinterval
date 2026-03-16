@@ -6,6 +6,7 @@ set(headers
     "${LIB_PATH}/arithmetic/basic.cuh"
     "${LIB_PATH}/cuinterval.h"
     "${LIB_PATH}/format.h"
+    "${LIB_PATH}/numbers.h"
 )
 
 add_library(cuinterval "main.cu" ${headers})
@@ -29,7 +30,7 @@ include(FetchContent)
 FetchContent_Declare(
   PackageProject
   GIT_REPOSITORY https://github.com/TheLartians/PackageProject.cmake.git
-  GIT_TAG v1.12.0
+  GIT_TAG v1.13.0
 )
 FetchContent_MakeAvailable(PackageProject)
 
@@ -40,5 +41,5 @@ packageProject(
     BINARY_DIR ${PROJECT_BINARY_DIR}
     INCLUDE_DIR ${INCLUDE_PATH}
     INCLUDE_DESTINATION include/${PROJECT_NAME}-${PROJECT_VERSION}
-    COMPATIBILITY SameMajorVersion
+    COMPATIBILITY SameMinorVersion
 )

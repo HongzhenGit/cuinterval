@@ -188,6 +188,9 @@ void tests_cosh_call(int numBlocks, int blockSize, cudaStream_t stream,
 void tests_cot_call(int numBlocks, int blockSize, cudaStream_t stream,
                  int n, cu::interval<double> *d_xs, cu::interval<double> *d_res);
 
+void tests_coth_call(int numBlocks, int blockSize, cudaStream_t stream,
+                 int n, cu::interval<double> *d_xs, cu::interval<double> *d_res);
+
 void tests_tanh_call(int numBlocks, int blockSize, cudaStream_t stream,
                  int n, cu::interval<double> *d_xs, cu::interval<double> *d_res);
 
@@ -214,3 +217,6 @@ void tests_pow_call(int numBlocks, int blockSize, cudaStream_t stream,
 
 void tests_rootn_call(int numBlocks, int blockSize, cudaStream_t stream,
                  int n, cu::interval<double> *d_xs, int *d_ys, cu::interval<double> *d_res);
+
+void tests_hypot_call(int numBlocks, int blockSize, cudaStream_t stream,
+                 int n, cu::interval<double> *d_xs, cu::interval<double> *d_ys, cu::interval<double> *d_res);
