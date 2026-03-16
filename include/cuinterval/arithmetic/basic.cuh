@@ -1191,7 +1191,7 @@ inline constexpr __device__ interval<T> powt(interval<T> x, T y)
 {
     // return exp(y * log(x));
     using intrinsic::next_floating, intrinsic::prev_floating;
-    using std::lrint, std::pow, std::sqrt;
+    using std::rint, std::lrint, std::pow, std::sqrt;
     
     // Handle empty input
     if (empty(x)) {
