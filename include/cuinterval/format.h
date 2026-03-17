@@ -3,7 +3,6 @@
 
 #include <cuinterval/interval.h>
 
-#include <format>
 #include <ostream>
 
 namespace cu
@@ -23,6 +22,9 @@ std::ostream &operator<<(std::ostream &os, split<T> x)
 
 } // namespace cu
 
+#if defined(__GNUC__) && __GNUC__ >= 13
+#include <format>
+
 template<typename T>
 struct std::formatter<cu::interval<T>> : std::formatter<T>
 {
@@ -37,5 +39,7 @@ struct std::formatter<cu::interval<T>> : std::formatter<T>
         return std::format_to(out, "]");
     }
 };
+
+#endif
 
 #endif // CUINTERVAL_FORMAT_H
